@@ -5,6 +5,8 @@ import keyboard
 import time
 
 def activate_bot(documentUrl, AirbusUserName, AirbusUserPass):
+    print("Bot over file at", documentUrl)
+
     urlLinktoDocument = documentUrl
 
     options = webdriver.ChromeOptions()
@@ -28,14 +30,15 @@ def activate_bot(documentUrl, AirbusUserName, AirbusUserPass):
     passwordField.send_keys(Keys.RETURN)
 
     try:
-        saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img') #--> To ISI 36.11.00106
+        saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
     except:
-        print("First element not found")
+        print('--Save button not found by XPath = //*[@id="save"]/a')
 
         try:
-            saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
+            saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
         except:
-            print("Second element not found")
+            print('--Save button not found by XPath = /html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
+            print("--No files downloaded")
             driver.quit()
                                             
     actions = ActionChains(driver)
@@ -56,6 +59,6 @@ def activate_bot(documentUrl, AirbusUserName, AirbusUserPass):
 
     time.sleep(5)
     
-    print("PDF file downloaded")
+    print("--PDF file downloaded\n")
 
     driver.quit()

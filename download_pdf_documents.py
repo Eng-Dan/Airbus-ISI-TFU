@@ -4,9 +4,9 @@ urlLinktoDocument = [
     'https://w3.airbus.com/1H43/MEFO_AW/TFU/MjguNTEuMDAuMDA0/article.html',
     'https://w3.airbus.com/1H43/MEFO_AW/TFU/MjMuMTMuMDAuMDIx/article.html',
     'https://w3.airbus.com/1H43/MEFO_AW/TFU/MzYuMTEuMDAxMDY=/article.html',
-    'https://w3.airbus.com/1H43/MEFO_AW/TFU/NzIuNjAuMDAuMDAy/article.html',
-    'https://w3.airbus.com/1H43/MEFO_AW/TFU/MzQuMDAuMDAuMTgz/article.html',
-    'https://w3.airbus.com/1H43/MEFO_AW/TFU/MjUuMjMuMDAuMDA2/article.html',
+    'https://w3.airbus.com/1H43/MEFO_AW/TFU/MzIuNTEuMDAuMDI4/article.html',
+    'https://w3.airbus.com/1H43/MEFO_AW/TFU/MzMuNDkuMDAuMDAz/article.html',
+    'https://w3.airbus.com/1H43/MEFO_AW/TFU/NDkuMDAuMDAuMDYx/article.html'
 ]
 
 for url in urlLinktoDocument:
