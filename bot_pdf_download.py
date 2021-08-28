@@ -27,9 +27,16 @@ def activate_bot(documentUrl, AirbusUserName, AirbusUserPass):
     passwordField.send_keys(AirbusUserPass)
     passwordField.send_keys(Keys.RETURN)
 
-    assert driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
-    saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img') #--> To ISI 36.11.00106
-    #saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
+    try:
+        saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img') #--> To ISI 36.11.00106
+    except:
+        print("First element not found")
+
+        try:
+            saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
+        except:
+            print("Second element not found")
+            driver.quit()
                                             
     actions = ActionChains(driver)
     actions.move_to_element(saveButton)
@@ -48,5 +55,7 @@ def activate_bot(documentUrl, AirbusUserName, AirbusUserPass):
     keyboard.press('enter')
 
     time.sleep(5)
+    
+    print("PDF file downloaded")
 
     driver.quit()
