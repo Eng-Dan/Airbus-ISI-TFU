@@ -8,9 +8,9 @@ def run_bot_pdf_download(documentUrl, AirbusUserName, AirbusUserPass):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-    with webdriver.Chrome("C:\\Users\\danilo.bezerra\\Documents\\Dev Resources\\chromedriver.exe", options=options) as driver:
+    with webdriver.Chrome("C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe", options=options) as driver:
         print("Getting PDF...")
-        driver.implicitly_wait(10)
+        #driver.implicitly_wait(10)
 
         driver.get(documentUrl)
 
@@ -22,6 +22,8 @@ def run_bot_pdf_download(documentUrl, AirbusUserName, AirbusUserPass):
         loginField.send_keys(AirbusUserName)
         passwordField.send_keys(AirbusUserPass)
         passwordField.send_keys(Keys.RETURN)
+
+        time.sleep(1)
         
         try:
             saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
@@ -40,18 +42,26 @@ def run_bot_pdf_download(documentUrl, AirbusUserName, AirbusUserPass):
         actions.click()
         actions.perform()
 
+        time.sleep(1)
+
         for window_handle in driver.window_handles:
                 if window_handle != documentWindowHandle:
                     driver.switch_to.window(window_handle)
                     break
                 
-        time.sleep(2)
+        time.sleep(1)
 
-        keyboard.press(['ctrl', 's'])
+        keyboard.send(['ctrl', 's'])
 
         time.sleep(1)
 
         keyboard.press('enter')
         print("  Download launched")
 
-        time.sleep(10)
+        time.sleep(5)
+
+
+
+# Single test case
+# url = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MjcuNTQuMDAwMDE=/article.html'
+# run_bot_pdf_download(url, 'SAO_danilobs', 'Aib20211')
