@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import keyboard
 import time
 
-def run_bot_pdf_download(documentUrl, AirbusUserName, AirbusUserPass):
+def run_bot_pdf_download(document_id, documentUrl, AirbusUserName, AirbusUserPass):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -55,13 +55,19 @@ def run_bot_pdf_download(documentUrl, AirbusUserName, AirbusUserPass):
 
         time.sleep(1)
 
+        for letter in document_id:
+            keyboard.write(letter)
+
+        time.sleep(1)
+
         keyboard.press('enter')
         print("  Download launched")
 
-        time.sleep(5)
+        time.sleep(8)
 
 
 
 # Single test case
-# url = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MjcuNTQuMDAwMDE=/article.html'
-# run_bot_pdf_download(url, 'SAO_danilobs', 'Aib20211')
+docId = '11.00.33.444'
+url = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MjcuNTQuMDAwMDE=/article.html'
+run_bot_pdf_download(docId, url, 'SAO_danilobs', 'Aib20211')
