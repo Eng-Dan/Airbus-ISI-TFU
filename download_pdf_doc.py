@@ -1,25 +1,37 @@
+
+# from bot_pdf_download import run_bot_pdf_download
 import csv
+from os import close
 
-def manage_file_opening(func):
+'''
+1. read csv file and store each row data in a dictionary variable
+2. for each row, check if the file already exists in the download folder
+    3. If it does not, run the bot to downloand
+    4. If ir does, 
 
-    def wrapper(*args, **kwargs):
-        func(*args, **kwargs)
-        csvFile.close()
-    
-    return wrapper
+'''
 
-
-@manage_file_opening
-def read_csv_file(csvFileToRead):
-    csvFile = open(csvFileToRead, newline='')
+def read_csv_file(pathToFile):
+    csvFile = open(pathToFile, newline='', mode='r+')
     data = csv.DictReader(csvFile)
+    # csvFile.close()
     return data
 
 
 
 # Single test case
 fileToRead = 'C:\\Users\\danilo.bezerra\\Data Source\\Cleaned\\doc_manager_download_control.csv'
-controlData = read_csv_file(fileToRead)
+csvReaderObject = read_csv_file(fileToRead)
 
-for row in controlData:
-    print(row)
+csvDataset = list(csvReaderObject)
+
+print(csvDataset[0]['document_id'])
+
+csvDataset[0]['document_id'] = 'foo'
+
+print(csvDataset[0]['document_id'])
+print(csvDataset[0])
+
+
+
+# print(controlData[0]['document_type'], controlData[0]['document_id'], controlData[0]['url_link_to_document'])

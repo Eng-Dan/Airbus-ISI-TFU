@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import keyboard
 import time
 
-def run_bot_pdf_download(document_id, documentUrl, AirbusUserName, AirbusUserPass):
+def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName, AirbusUserPass, waitToDownload=5):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -23,7 +23,7 @@ def run_bot_pdf_download(document_id, documentUrl, AirbusUserName, AirbusUserPas
         passwordField.send_keys(AirbusUserPass)
         passwordField.send_keys(Keys.RETURN)
 
-        time.sleep(1)
+        #time.sleep(1)
         
         try:
             saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
@@ -55,19 +55,19 @@ def run_bot_pdf_download(document_id, documentUrl, AirbusUserName, AirbusUserPas
 
         time.sleep(1)
 
-        for letter in document_id:
-            keyboard.write(letter)
+        documentName = documentType + '_' + document_id
 
-        time.sleep(1)
+        for char in documentName:
+            keyboard.write(char)
 
         keyboard.press('enter')
         print("  Download launched")
 
-        time.sleep(8)
+        time.sleep(waitToDownload)
 
 
 
 # Single test case
-docId = '11.00.33.444'
-url = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MjcuNTQuMDAwMDE=/article.html'
-run_bot_pdf_download(docId, url, 'SAO_danilobs', 'Aib20211')
+# docId = '11.00.33.444'
+# url = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MjcuNTQuMDAwMDE=/article.html'
+# run_bot_pdf_download(docId, url, 'SAO_danilobs', 'Aib20211')
