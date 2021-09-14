@@ -1,37 +1,43 @@
-
-# from bot_pdf_download import run_bot_pdf_download
+import os.path
 import csv
-from os import close
+from bot_pdf_download import run_bot_pdf_download
 
-'''
-1. read csv file and store each row data in a dictionary variable
-2. for each row, check if the file already exists in the download folder
-    3. If it does not, run the bot to downloand
-    4. If ir does, 
+def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
+    pathToControlFile = 'C:\\Users\\danilo.bezerra\\Data Source\\Cleaned\\doc_manager_download_control.csv'
+    pathToDownloadFolder = 'C:\\Users\\danilo.bezerra\\Downloads\\DocManager\\'
 
-'''
+    with open(pathToControlFile, newline='', mode='r+') as csvFile:
+        csvReaderObject = csv.DictReader(csvFile)
+        dataset = list(csvReaderObject)
 
-def read_csv_file(pathToFile):
-    csvFile = open(pathToFile, newline='', mode='r+')
-    data = csv.DictReader(csvFile)
-    # csvFile.close()
-    return data
+        downloads = 0
+        try:
+            for rowDict in dataset:
+                fileName = rowDict['document_id'] + '_' + rowDict['document_type'] + '.pdf'
+                fileDownloaded = os.path.isfile(pathToDownloadFolder + fileName)
 
+                if not fileDownloaded:
+                    downloadWait = 5
 
+                    for attempt in range(3):
+                        run_bot_pdf_download(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, downloadWait)
+                        
+                        if not fileDownloaded:
+                            print('Failed attempt to download:', fileName)
+                            downloadWait += 5
+                        else:
+                            print('Downloaded:', fileName)
+                            downloads += 1
+                            break
 
-# Single test case
-fileToRead = 'C:\\Users\\danilo.bezerra\\Data Source\\Cleaned\\doc_manager_download_control.csv'
-csvReaderObject = read_csv_file(fileToRead)
+                if downloads == numDownloads:
+                    print('Full batch download complete.')
+                    break
 
-csvDataset = list(csvReaderObject)
+            if downloads == 0:
+                print('It seems that all documents from DOWNLOAD CONTROL file have been already downloaded.')
+            elif downloads > 0:
+                print('Downloaded', downloads, 'new documents.')
 
-print(csvDataset[0]['document_id'])
-
-csvDataset[0]['document_id'] = 'foo'
-
-print(csvDataset[0]['document_id'])
-print(csvDataset[0])
-
-
-
-# print(controlData[0]['document_type'], controlData[0]['document_id'], controlData[0]['url_link_to_document'])
+        except:
+            print('>> Error or none documents to download.')

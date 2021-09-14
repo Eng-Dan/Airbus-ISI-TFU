@@ -9,7 +9,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     with webdriver.Chrome("C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe", options=options) as driver:
-        print("Getting PDF...")
+        print("Bot: Getting PDF...")
         #driver.implicitly_wait(10)
 
         driver.get(documentUrl)
@@ -28,13 +28,13 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
         try:
             saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
         except:
-            print('-- Error: Save button not found by XPath = //*[@id="save"]/a')
+            print('-- Bot: Error: Save button not found by XPath = //*[@id="save"]/a')
 
             try:
                 saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
             except:
-                print('-- Error: Save button not found by XPath = /html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
-                print("   No files downloaded")
+                print('-- Bot: Error: Save button not found by XPath = /html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
+                print("   Bot: None files downloaded")
                 driver.quit()
 
         actions = ActionChains(driver)
@@ -55,19 +55,12 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
 
         time.sleep(1)
 
-        documentName = documentType + '_' + document_id
+        documentName =  document_id + '_' + documentType
 
         for char in documentName:
             keyboard.write(char)
 
         keyboard.press('enter')
-        print("  Download launched")
+        print("  Bot: Download launched")
 
         time.sleep(waitToDownload)
-
-
-
-# Single test case
-# docId = '11.00.33.444'
-# url = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MjcuNTQuMDAwMDE=/article.html'
-# run_bot_pdf_download(docId, url, 'SAO_danilobs', 'Aib20211')
