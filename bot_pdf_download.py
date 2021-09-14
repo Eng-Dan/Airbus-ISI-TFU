@@ -9,7 +9,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     with webdriver.Chrome("C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe", options=options) as driver:
-        print("Bot: Getting PDF...")
+        print("Bot: Getting PDF document:", documentType, document_id, "...")
         #driver.implicitly_wait(10)
 
         driver.get(documentUrl)
