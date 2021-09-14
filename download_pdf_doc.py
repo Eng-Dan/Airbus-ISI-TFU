@@ -4,25 +4,27 @@ from bot_pdf_download import run_bot_pdf_download
 
 def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
     pathToControlFile = 'C:\\Users\\danilo.bezerra\\Data Source\\Cleaned\\doc_manager_download_control.csv'
-    pathToDownloadFolder = 'C:\\Users\\danilo.bezerra\\Downloads\\DocManager\\'
+    pathToDownloadFolder = 'C:\\Users\\danilo.bezerra\\Downloads\\'
 
     with open(pathToControlFile, newline='', mode='r+') as csvFile:
         csvReaderObject = csv.DictReader(csvFile)
         dataset = list(csvReaderObject)
 
+        for row in range(3):
+            print(dataset[row])
+
         downloads = 0
         try:
             for rowDict in dataset:
                 fileName = rowDict['document_id'] + '_' + rowDict['document_type'] + '.pdf'
-                fileDownloaded = os.path.isfile(pathToDownloadFolder + fileName)
 
-                if not fileDownloaded:
+                if not os.path.isfile(pathToDownloadFolder + fileName):
                     downloadWait = 5
 
                     for attempt in range(3):
                         run_bot_pdf_download(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, downloadWait)
                         
-                        if not fileDownloaded:
+                        if not os.path.isfile(pathToDownloadFolder + fileName):
                             print('Failed attempt to download:', fileName)
                             downloadWait += 5
                         else:
@@ -37,7 +39,7 @@ def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
             if downloads == 0:
                 print('It seems that all documents from DOWNLOAD CONTROL file have been already downloaded.')
             elif downloads > 0:
-                print('Downloaded', downloads, 'new documents.')
+                print(downloads, 'new documents downloaded.')
 
         except:
             print('>> Error or none documents to download.')
