@@ -10,9 +10,6 @@ def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
         csvReaderObject = csv.DictReader(csvFile)
         dataset = list(csvReaderObject)
 
-        for row in range(3):
-            print(dataset[row])
-
         downloads = 0
         try:
             for rowDict in dataset:
