@@ -18,12 +18,12 @@ def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
                 if not os.path.isfile(pathToDownloadFolder + fileName):
                     downloadWait = 5
 
-                    for attempt in range(3):
-                        run_bot_pdf_download(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, downloadWait)
+                    for attempt in range(1, 4):
+                        run_bot_pdf_download(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, waitToDownload=downloadWait)
                         
                         if not os.path.isfile(pathToDownloadFolder + fileName):
-                            print('Failed attempt to download:', fileName)
-                            downloadWait += 5
+                            print('Attempt', attempt, 'FAILED for', fileName)
+                            downloadWait += 10
                         else:
                             print('Downloaded:', fileName)
                             downloads += 1

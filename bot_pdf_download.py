@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support.ui import WebDriverWait
 import keyboard
 import time
 
@@ -9,7 +10,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     with webdriver.Chrome("C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe", options=options) as driver:
-        print("Bot: Getting PDF document:", documentType, document_id, "...")
+        print("Bot: Getting PDF document:", documentType, document_id, "at", documentUrl)
         #driver.implicitly_wait(10)
 
         driver.get(documentUrl)
@@ -48,12 +49,14 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
                 if window_handle != documentWindowHandle:
                     driver.switch_to.window(window_handle)
                     break
-                
-        time.sleep(1)
+
+        # wait = WebDriverWait.
+
+        time.sleep(5)
 
         keyboard.send(['ctrl', 's'])
 
-        time.sleep(1)
+        time.sleep(2)
 
         documentName =  document_id + '_' + documentType
 
