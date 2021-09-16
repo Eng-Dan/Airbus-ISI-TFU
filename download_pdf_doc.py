@@ -25,8 +25,8 @@ def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
                             print('Attempt', attempt, 'FAILED for', fileName)
                             downloadWait += 10
                         else:
-                            print('Downloaded:', fileName)
                             downloads += 1
+                            print('Downloaded', downloads, 'of', numDownloads, ':', fileName)
                             break
 
                 if downloads == numDownloads:

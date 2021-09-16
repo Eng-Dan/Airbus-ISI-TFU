@@ -52,7 +52,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
 
         # wait = WebDriverWait.
 
-        time.sleep(5)
+        time.sleep(waitToDownload)
 
         keyboard.send(['ctrl', 's'])
 
