@@ -23,19 +23,15 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
         loginField.send_keys(AirbusUserName)
         passwordField.send_keys(AirbusUserPass)
         passwordField.send_keys(Keys.RETURN)
-
-        #time.sleep(1)
         
         try:
             saveButton = driver.find_element_by_xpath('//*[@id="save"]/a')
         except:
-            print('-- Bot: Error: Save button not found by XPath = //*[@id="save"]/a')
-
             try:
                 saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
             except:
-                print('-- Bot: Error: Save button not found by XPath = /html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
-                print("   Bot: None files downloaded")
+                print('Bot: Save button not found by XPath')
+                print(">>>> ERROR to download", documentType, documentType, ': Check for correct URL link')
                 driver.quit()
 
         actions = ActionChains(driver)
@@ -64,6 +60,6 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
             keyboard.write(char)
 
         keyboard.press('enter')
-        print("  Bot: Download launched")
+        print("Bot: Download launched")
 
         time.sleep(waitToDownload)

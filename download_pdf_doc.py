@@ -22,11 +22,11 @@ def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
                         run_bot_pdf_download(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, waitToDownload=downloadWait)
                         
                         if not os.path.isfile(pathToDownloadFolder + fileName):
-                            print('Attempt', attempt, 'FAILED for', fileName)
+                            print('Attempt', attempt, 'FAILED to download', fileName)
                             downloadWait += 10
                         else:
                             downloads += 1
-                            print('Downloaded', downloads, 'of', numDownloads, ':', fileName)
+                            print('--> Downloaded', downloads, 'of', numDownloads, ':', fileName)
                             break
 
                 if downloads == numDownloads:
