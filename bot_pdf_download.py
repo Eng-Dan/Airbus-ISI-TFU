@@ -1,17 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.support.ui import WebDriverWait
 import keyboard
 import time
 
-def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName, AirbusUserPass, waitToDownload=5):
+
+def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName, AirbusUserPass, waitToDownload=10):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-    with webdriver.Chrome("C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe", options=options) as driver:
+    pathToChromeDriver = "C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe"
+    with webdriver.Chrome(pathToChromeDriver, options=options) as driver:
         print("Bot: Getting PDF document:", documentType, document_id, "at", documentUrl)
-        #driver.implicitly_wait(10)
 
         driver.get(documentUrl)
 
@@ -30,7 +30,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
             try:
                 saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
             except:
-                print('Bot: Save button not found by XPath')
+                print('\nBot: Save button not found by XPath')
                 print(">>>> ERROR to download", documentType, documentType, ': Check for correct URL link')
                 driver.quit()
 
@@ -42,9 +42,9 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
         time.sleep(1)
 
         for window_handle in driver.window_handles:
-                if window_handle != documentWindowHandle:
-                    driver.switch_to.window(window_handle)
-                    break
+            if window_handle != documentWindowHandle:
+                driver.switch_to.window(window_handle)
+                break
 
         # wait = WebDriverWait.
 
@@ -52,9 +52,9 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
 
         keyboard.send(['ctrl', 's'])
 
-        time.sleep(2)
+        time.sleep(5)
 
-        documentName =  document_id + '_' + documentType
+        documentName = document_id + '_' + documentType
 
         for char in documentName:
             keyboard.write(char)
