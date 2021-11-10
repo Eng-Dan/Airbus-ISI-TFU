@@ -5,7 +5,7 @@ import keyboard
 import time
 
 
-def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName, AirbusUserPass, waitToDownload=10):
+def run_bot(document_id, documentType, documentUrl, AirbusUserName, AirbusUserPass, waitToDownload=10):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -31,7 +31,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
                 saveButton = driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[2]/a/img')
             except:
                 print('\nBot: Save button not found by XPath')
-                print(">>>> ERROR to download", documentType, documentType, ': Check for correct URL link')
+                print(">>>> ERROR to download", documentType, document_id, ': Check for correct URL link')
                 driver.quit()
 
         actions = ActionChains(driver)
@@ -48,7 +48,7 @@ def run_bot_pdf_download(document_id, documentType, documentUrl, AirbusUserName,
 
         # wait = WebDriverWait.
 
-        time.sleep(waitToDownload)
+        time.sleep(5)
 
         keyboard.send(['ctrl', 's'])
 

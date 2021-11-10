@@ -1,6 +1,7 @@
 import os.path
 import csv
-from bot_pdf_download import run_bot_pdf_download
+from bot import run_bot
+
 
 def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
     pathToControlFile = 'C:\\Users\\danilo.bezerra\\Data Source\\Cleaned\\doc_manager_download_control.csv'
@@ -19,14 +20,14 @@ def execute_download(numDownloads, AirbusUserName, AirbusUserPass):
                     downloadWait = 5
 
                     for attempt in range(1, 4):
-                        run_bot_pdf_download(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, waitToDownload=downloadWait)
+                        run_bot(rowDict['document_id'], rowDict['document_type'], rowDict['url_link_to_document'], AirbusUserName, AirbusUserPass, waitToDownload=downloadWait)
                         
                         if not os.path.isfile(pathToDownloadFolder + fileName):
                             print('Attempt', attempt, 'FAILED to download', fileName)
                             downloadWait += 10
                         else:
                             downloads += 1
-                            print('--> Downloaded', downloads, 'of', numDownloads, ':', fileName)
+                            print('--> Downloaded', downloads, 'of', numDownloads, ':', fileName, '\n')
                             break
 
                 if downloads == numDownloads:

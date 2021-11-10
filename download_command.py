@@ -1,8 +1,7 @@
-from download_pdf_doc import execute_download
-# from bot_pdf_download import run_bot_pdf_download
+from download_pdf import execute_download
 
 # Batch download
-execute_download(200, 'SAO_danilobs', 'Aib20211')
+execute_download(1000, 'InsertAirbusUser', 'InsertAirbusPassword')
 
 # Single Download
 # urlLink = 'https://w3.airbus.com/1H43/MEFO_AW/ISI/MDAuMDAuMDAwODg=/article.html'
