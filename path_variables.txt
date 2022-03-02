@@ -1,3 +1,3 @@
-C:\Users\danilo.bezerra\Data Source\Cleaned\doc_manager_download_control.csv
-C:\Users\danilo.bezerra\Downloads\
-C:\Users\danilo.bezerra\Programming\Resources\chromedriver.exe
+C:\...\control_file_name.csv
+C:\...\Downloads\
+C:\...\chromedriver.exe

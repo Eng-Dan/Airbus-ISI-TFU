@@ -19,27 +19,15 @@ def execute_downloads(num_downloads, path_variables_file, wait_to_download=5):
     :param path_variables_file: path to file in .csv format containing the documents meta data.
     :param wait_to_download: an initial time interval in seconds to wait for complete download of the document, default = 5 seconds.
     :return: None.
-
-    file_name.csv
-        |- document_id: e.g.: 00.00.00016
-        |- document_type: e.g.: ISI or TFU
-        |- document_status: e.g.: CLOSE or OPEN or N/A
-        |- first_issue_date: e.g.: 2011-10-26
-        |- last_revision_date: e.g.: 2018-12-07
-        |- url_link_to_document: e.g.: https://w3.airbus.com/1H43/MEFO_AW/ISI/MDAuMDAuMDAwMTY=/article.html
-        |- pdf_downloaded: e.g.: True or False
     """
 
     airbus_login = input('Enter your Airbus World user name:')
     airbus_password = input('Enter your Airbus World password:')
 
     path_variables = get_path_variables(path_variables_file)
-    # [0] path to .csv download control file
-    # [1] path to download folder
-    # [2] path to chromedriver.exe
-
-    # documents_list_file = 'C:\\Users\\danilo.bezerra\\Data Source\\Cleaned\\doc_manager_download_control.csv'
-    # download_folder_path = 'C:\\Users\\danilo.bezerra\\Downloads\\'
+    # index [0] is the path to .csv download control file
+    # index [1] is the path to the download folder
+    # index [2] is the path to chromedriver.exe file
 
     with open(path_variables[0], newline='', mode='r+') as csvFile:
         csv_reader_obj = csv.DictReader(csvFile)

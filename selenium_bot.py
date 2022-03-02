@@ -19,13 +19,11 @@ def run_bot(document_id, document_type, document_url, airbus_login, airbus_passw
     :param wait_to_download: an initial time interval to wait for complete download of the document.
     :param chromedriver: path to the Chrome Driver .exe file
     :return: None.
-
     """
 
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-    # chrome_driver = "C:\\Users\\danilo.bezerra\\Programming\\Resources\\chromedriver.exe" <-- Obsolete
     # ATTENTION! Check the correct Google Chrome Driver version in accordance with your Chrome version.
     with webdriver.Chrome(chromedriver, options=options) as driver:
         print("Bot message: Getting PDF document:", document_type, document_id, "at", document_url)
